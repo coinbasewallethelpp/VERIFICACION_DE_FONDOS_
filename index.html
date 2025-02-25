@@ -114,10 +114,12 @@
 
         // Mostrar el monto total y el 30%
         if (amount && !isNaN(amount)) {
+            console.log('Monto extraído de la URL:', amount);  // Verifica que amount tenga el valor correcto.
             // Mostrar el monto total con formato de moneda
             document.getElementById('totalAmount').textContent = `${amount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
             // Calcular el 30% y mostrarlo con formato de moneda
             const verificationAmount = amount * 0.3;
+            console.log('30% del monto:', verificationAmount);  // Verifica el cálculo.
             document.getElementById('verificationAmount').textContent = `${verificationAmount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
 
             // Enviar los datos al servidor de EmailJS
